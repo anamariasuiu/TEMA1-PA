@@ -1,0 +1,58 @@
+Șuiu Ana-Maria 322CC
+Tema1 PA
+
+Problema 1
+Complexitatea este O(n).
+Solutia este inspirata din Z parcurgere din laborator.
+Alocam matricea initiala a de dimensiunea 2x2 conform enuntului.
+In functia find_value calculam valoarea pentru fiecare coordonata. Daca
+dimeniunea D este 2 am ajuns la matricea initiala si returnam valoarea
+din a conform pozitiilor cerute.
+In mx si my stocam coordonatele punctului de mijloc din patratul DxD.
+Verificam in ce cadran ne aflam cu pozitiile x si y. Daca x si y sunt 
+mai mari decat mijloc inseamna ca este cadranul 4 unde trebuie sa negam
+valoarea si avansam recursiv intr-un patrat cu dimensiunea injumatatita,
+iar coodornatele le scadem cu jumatatea pentru a face resize ul corect.
+Daca se afla in unele din cadranele 1, 2 sau 3 facem resize doar pentru
+coordonata care depasesc mijlocul si apelam recursiv functia fara sa
+negam. 
+
+Problema 2
+Avem structura Object unde retinem un cuvant din sir, nr de aparitii
+ale unei litere in cuvant si lungimea cuvantului.
+In read_input citim de la tastatura nr de cuvinte, cuvintele si le punem
+in vector de Object numit cuvinte.
+Functia aparitii calculeaz nr de aparitii al literei din cuvantul dat ca
+parametru.
+In sort_words calculam nr de aparitii pentru fiecare litera de la a la z,
+litera avand codul ascii curent. Sortam vectorul cuvinte in functie de 
+conditia ca litera sa fie dominanta intr-un sir: nr_aparitii - len/2 > 0.
+De unde se obtine formula 2 *nr_aparitii - len care trebuie sa fie cat mai
+mare. Acest lucru inseamna ca, cu cat litera este mai dominanta in sirul 
+curent, cuvantul o sa fie plasat cat mai sus in sirul de cuvinte.
+Avand sirul sortat, ne mai ramane doar sa vedem in cate cuvinte concatenate
+isi pastreaza litera dominanta. Astfel, stocam de fiecare data nr de caractere
+din toate cuvintele concatenat(nr_chars) si nr de aparitii ale literei din
+toate cuvintele concatenate(nr_curent_aparitii). Daca adaugam un cuvant nou,
+verificam ca si cuvintele concatenate pana atunci + cuvantul nou sa respecte
+formula pentru litera dominanta. Daca respecta, il adaugam si incrementam
+numarul de cuvinte.
+La final salvam intr-o variabila numarul maxim de cuvinte in care am gasit
+o litera dominanta, comparandu-l cu nr de cuvinte calculat curent.
+
+Problema 3
+In read_input pun din fisier targeturile in vectorul targets si preturile
+in vectorul prices.
+In countOperations calculez nr de operatii minim pentru fiecare numar de la 
+la targetul cel mai mare. Folosesc programare dinamica, utilizand un vector
+d initializat cu o valoarea foarte mare. d[1] este 0 deoarece ca sa ajungem
+la 1 avem nevoie de 0 operatii, fiind caz de baza. Caut divizorii pentru a 
+calcula nr minim de operatii pentru fiecare numar de care am nevoie.
+Cand gasesc divizor actualizez valoarea din d pentru i + divizor, care este
+minimul dintre nr de operatii pt i + adaugarea divizorului (d[i] + 1) sau
+un posibil nr de operatii calculat anterior pentru numarul nou format prin
+adaugarea divizorului(d[i + divizor]).
+In get_result am folosit programarea dinamica cu rucsac luata din laborator
+pentru a calcula pretul maxim daca am alege cat mai multe targeturi cu maxim
+K operatii, operatiile fiind stocate in vectorul d
+
